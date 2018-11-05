@@ -1,0 +1,24 @@
+{
+  "name": "connect",
+  "version": "1.0.0",
+  "description": "A a game similare to connect four created using React.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carlloganjr/connect.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carlloganjr/connect/issues"
+  },
+  "homepage": "https://github.com/carlloganjr/connect#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2"
+  }
+}
