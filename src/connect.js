@@ -45,7 +45,33 @@ function Board(props) {
          </div>
 }
 
+class Game extends React.Component {
+  constructor(props) {
+    super(props)
+
+    var cells = []
+    for (let i = 0; i < 6; i++) {
+      cells.push(new Array(7).fill(0))
+    }
+    this.state = {player:false, cells:cells, winner:0}
+    this.handleClick = this.handleClick.bind(this)
+  }
+  handleClick() {
+    console.log("clicked")
+    <Board cells = {this.state.cells} handleClick = {this.handleClick}/>
+  }
+  render() {
+    return (
+      <div>
+        <h1>Black's Turn</h1>
+        <Board/>
+        <button>Restart</button>
+      </div>
+    )
+  }
+}
+
 ReactDOM.render(
-  <Board/>,
+  <Game/>,
   document.getElementById('root')
 )
