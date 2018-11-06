@@ -48,7 +48,8 @@ function Row(props) {
 function Board(props) {
   var rows = [];
   for (var i = 5; i >= 0; i--) {
-    rows.push(React.createElement(Row, null));
+    rows.push(React.createElement(Row, { key: i, row: i, cells: props.cells[i],
+      handleClick: props.handleClick }));
   }
   return React.createElement(
     "div",
@@ -78,6 +79,7 @@ var Game = function (_React$Component) {
     key: "handleClick",
     value: function handleClick() {
       console.log("clicked");
+      // <Board cells = {this.state.cells} handleClick = {this.handleClick}/>
     }
   }, {
     key: "render",
