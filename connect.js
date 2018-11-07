@@ -7,6 +7,12 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function Circle(props) {
+  var color = "white";
+  if (props.cell == 1) {
+    color = "black";
+  } else if (props.cell == 2) {
+    color = "red";
+  }
   var style = {
     backgroundColor: "white",
     border: "1px solid black",
@@ -25,8 +31,10 @@ function Cell(props) {
   };
   return React.createElement(
     "div",
-    { style: style },
-    React.createElement(Circle, null)
+    { style: style, onClick: function onClick() {
+        return props.handleClick(props.row, props.col);
+      } },
+    React.createElement(Circle, { cell: props.cell })
   );
 }
 
@@ -36,7 +44,8 @@ function Row(props) {
   };
   var cells = [];
   for (var i = 0; i < 7; i++) {
-    cells.push(React.createElement(Cell, null));
+    cells.push(React.createElement(Cell, { key: i, cell: props.cells[i], row: props.row,
+      col: i, handleClick: props.handleClick }));
   }
   return React.createElement(
     "div",
@@ -77,9 +86,15 @@ var Game = function (_React$Component) {
 
   _createClass(Game, [{
     key: "handleClick",
-    value: function handleClick() {
-      console.log("clicked");
-      // <Board cells = {this.state.cells} handleClick = {this.handleClick}/>
+    value: function handleClick(row, col) {
+      console.log("row: " + row + " | col: " + col);
+      console.log(this.state.cells);
+      var temp = [];
+      for (var i = 0; i < 6; i++) {
+        temp.push(this.state.cells[i].slice());
+      }
+      temp[row][col] = 1;
+      this.setState({ cells: temp });
     }
   }, {
     key: "render",
@@ -92,7 +107,7 @@ var Game = function (_React$Component) {
           null,
           "Black's Turn"
         ),
-        React.createElement(Board, null),
+        React.createElement(Board, { cells: this.state.cells, handleClick: this.handleClick }),
         React.createElement(
           "button",
           null,
